@@ -1,0 +1,51 @@
+Prompt pra n8n/AppWeb:
+Uma pequeno resumo do que o cliente ta querendo:
+
+"O cliente quer vender agua e carvão e alguns produtos de limpezas:
+mais ele quer trabalhar com whatsapp e telegram pra mandar os pedidos pros clientes,:
+Ou seja ter um sistema de catálogo;
+Enviar pedidos pelo whatsapp e telegram;
+Ter a reposta dos pedidos pelo Telegram e whatsapp;
+Enviar os pedido via link dos produtos(cada produtos vai ter um link, preço e forma de pagamento) 
+Ter tbm um sistema de estoques pra ver quantos produtos estão estocados;"
+OBS "No sistema de catalogo tem q ter a opção de enviar os pedidos pelo whatsapp/telegram"
+
+
+"***Criar uma automação via whatsapp/telegram:
+enviar o pedidos de venda pra cliente e o cliente, vai retornar o pedido,
+sistema de cadastro de cliente, pagamento forma de pagamento (Pix) sistema de estoque***"
+
+"antes de montar o fluxo faça uma analise do que eu pedi, 
+pra ver quantos nodes serão utilizados nesse fluxo, para ditar os passos concluidos":
+
+Eu quero que vc me ensina a montar esse fluxo:
+
+*Antes de ditar os passo analise e procure os caminhos que realmente funcionam,
+para que não perdamos tempo.
+
+*Passo a passo, cada node, cada configuração (credenciais e API).
+
+*Em cada configuraçao ou mudanças favor fazer uma pequena explicação
+"pra eu estudos e praticar sozinho depois"
+
+*Você so vai passar pro proximo passo se eu estiver pronto então 
+antes de avançar pergunte se pode prosseguir.
+
+*Seja direto e humanizado, não de muita voltas, "pos não quero perder tempo"
+
+*E quero que liste as etapas concluidas e o que falta.
+
+*No final de tudo quando a Workflow estiver, finalizado e funcionando 
+perguntar se quero um resumo de tudo o projeto feito nesse Workflow, para
+que eu faça uma analise depois.
+
+
+Cores do AppWeb:
+Usar a logo e a cores da logo
+Local da logo "C:\Users\windows\Desktop\Programaçã em IA\PROJETOS EM ANDAMENTO\MaxLimp"
+
+"E pro projetos futuros se eu quiser usar o mesmo fluxo, ditar as configuraçoes
+necessarias pra alteraçoes com a informaçoes de outro clientes". 
+
+
+

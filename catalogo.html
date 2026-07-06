@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MaxLimp - Soluções em Limpeza | Catálogo</title>
+<style>
+  :root{
+    --azul-escuro:#0B1E4D;
+    --azul-vivo:#1565D8;
+    --azul-claro:#2F8CFF;
+    --whatsapp:#25D366;
+    --telegram:#229ED9;
+    --bg:#F4F7FC;
+    --card-bg:#FFFFFF;
+    --texto:#0B1E4D;
+    --texto-suave:#5B6B8C;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Segoe UI',Arial,sans-serif;
+    background:var(--bg);
+    color:var(--texto);
+    padding-bottom:60px;
+  }
+  header{
+    background:linear-gradient(135deg,var(--azul-escuro),var(--azul-vivo));
+    padding:28px 20px 36px;
+    text-align:center;
+    color:#fff;
+    border-radius:0 0 28px 28px;
+    box-shadow:0 6px 18px rgba(11,30,77,0.25);
+  }
+  header img{
+    max-width:220px;
+    width:60%;
+    background:#fff;
+    border-radius:14px;
+    padding:10px 16px;
+    margin-bottom:10px;
+  }
+  header p.subtitulo{
+    font-size:22px;
+    opacity:0.9;
+    margin-top:4px;
+  }
+  main{
+    max-width:1000px;
+    margin:0 auto;
+    padding:24px 16px;
+  }
+  h2.secao{
+    font-size:20px;
+    margin:28px 0 14px;
+    color:var(--azul-escuro);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+    gap:18px;
+  }
+  .card{
+    background:var(--card-bg);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 4px 14px rgba(11,30,77,0.08);
+    display:flex;
+    flex-direction:column;
+    transition:transform .15s ease;
+  }
+  .card:hover{transform:translateY(-3px);}
+  .card .img-wrap{
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:170px;
+    padding:12px;
+    border-bottom:1px solid #eef1f7;
+    cursor:pointer;
+  }
+  .card img.produto{
+    max-height:100%;
+    max-width:100%;
+    object-fit:contain;
+  }
+  .card .info{
+    padding:14px 16px 16px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+  }
+  .card .nome{
+    font-size:16px;
+    font-weight:600;
+    margin-bottom:4px;
+  }
+  .card .desc{
+    font-size:13px;
+    color:var(--texto-suave);
+    margin-bottom:10px;
+    flex:1;
+  }
+  .card .preco{
+    font-size:19px;
+    font-weight:700;
+    color:var(--azul-vivo);
+    margin-bottom:6px;
+  }
+  .card .estoque{
+    font-size:12px;
+    font-weight:600;
+    color:#1F8A4C;
+    background:#E8F7EE;
+    border-radius:20px;
+    padding:3px 10px;
+    display:inline-block;
+    margin-bottom:8px;
+    width:fit-content;
+  }
+  .card .pagamento{
+    font-size:12px;
+    color:var(--texto-suave);
+    margin-bottom:12px;
+    display:flex;
+    align-items:center;
+    gap:4px;
+  }
+  .botoes{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .botoes a, .botoes button{
+    flex:1;
+    min-width:80px;
+    text-decoration:none;
+    text-align:center;
+    padding:9px 8px;
+    border-radius:10px;
+    border:none;
+    font-size:13px;
+    font-weight:600;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .btn-whats{background:var(--whatsapp);}
+  .btn-tele{background:var(--telegram);}
+  .btn-pix{background:#32BCAD;}
+  .btn-link{background:var(--azul-escuro);}
+  .botoes a:active, .botoes button:active{opacity:.85;}
+  footer{
+    text-align:center;
+    padding:30px 16px 10px;
+    color:var(--texto-suave);
+    font-size:13px;
+  }
+  .aviso-config{
+    max-width:1000px;
+    margin:16px auto 0;
+    background:#FFF7E0;
+    border:1px solid #F0D98C;
+    color:#7A5B00;
+    padding:12px 16px;
+    border-radius:10px;
+    font-size:13px;
+  }
+  .modal-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(11,30,77,0.55);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:100;
+  }
+  .modal-overlay.aberto{
+    display:flex;
+  }
+  .modal-box{
+    background:#fff;
+    border-radius:18px;
+    max-width:420px;
+    width:100%;
+    max-height:90vh;
+    overflow-y:auto;
+    position:relative;
+    box-shadow:0 10px 40px rgba(11,30,77,0.35);
+  }
+  .modal-fechar{
+    position:absolute;
+    top:10px;
+    right:12px;
+    background:rgba(11,30,77,0.08);
+    border:none;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    font-size:18px;
+    line-height:1;
+    cursor:pointer;
+    color:var(--texto);
+  }
+  .modal-img-wrap{
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:240px;
+    padding:16px;
+    border-bottom:1px solid #eef1f7;
+  }
+  .modal-img-wrap img{
+    max-height:100%;
+    max-width:100%;
+    object-fit:contain;
+  }
+  .modal-info{
+    padding:18px 20px 20px;
+  }
+  .modal-info .nome{
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .modal-info .preco{
+    font-size:21px;
+    font-weight:700;
+    color:var(--azul-vivo);
+    margin-bottom:8px;
+  }
+  .modal-info .desc{
+    font-size:13px;
+    color:var(--texto-suave);
+    margin-bottom:12px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="MaxLimp.jpeg" alt="MaxLimp - Soluções em Limpeza">
+  <p class="subtitulo">Água fresquinha, carvão de qualidade e a limpeza da sua casa em dia — tudo isso com a confiança de quem cuida do seu dia a dia como se fosse o nosso.</p>
+</header>
+
+<div class="aviso-config">
+  <strong>Configuração pendente:</strong> troque <code>whatsappNumber</code> e <code>telegramBot</code> no script no fim do arquivo, e ajuste os preços em <code>PRODUCTS</code> antes de publicar.
+</div>
+
+<main>
+
+  <h2 class="secao">Água Mineral</h2>
+  <div class="grid" id="grid-agua"></div>
+
+  <h2 class="secao">Carvão Vegetal</h2>
+  <div class="grid" id="grid-carvao"></div>
+
+</main>
+
+<footer>
+  MaxLimp Soluções em Limpeza — Peça pelo botão do produto e a gente confirma tudo por WhatsApp ou Telegram, incluindo pagamento via Pix.
+</footer>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-fechar" id="modalFechar" type="button">&times;</button>
+    <div class="modal-img-wrap">
+      <img id="modalImg" src="" alt="">
+    </div>
+    <div class="modal-info">
+      <div class="nome" id="modalNome"></div>
+      <div class="preco" id="modalPreco"></div>
+      <div class="desc" id="modalDesc"></div>
+      <div class="estoque" id="modalEstoque"></div>
+      <div class="pagamento">Pagamento via Pix</div>
+      <div class="botoes" id="modalBotoes"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ====== CONFIGURAÇÃO (TROCAR AQUI) ======
+  const CONFIG = {
+    whatsappNumber: '5599999999999',   // TROCAR: DDI+DDD+numero, só números (ex: 5581999998888)
+    telegramBot: 'SEU_BOT_AQUI',       // TROCAR: username do bot do Telegram, sem @
+    pixKey: 'chave-pix-maxlimp@exemplo.com'  // TROCAR: chave Pix real da MaxLimp
+  };
+
+  // ====== PRODUTOS (TROCAR PREÇOS REAIS) ======
+  const PRODUCTS = [
+    {
+      name: 'Água Mineral 5L Premium (Daflora)',
+      desc: 'Água mineral natural, embalagem com alça, ideal pra casa ou escritório.',
+      price: 12.00,
+      stock: 42,
+      image: 'agua1.png',
+      grid: 'grid-agua'
+    },
+    {
+      name: 'Água Mineral 20L (Galão Retornável)',
+      desc: 'Galão retornável, perfeito pra bebedouro e consumo diário.',
+      price: 15.00,
+      stock: 18,
+      image: 'agua2.png',
+      grid: 'grid-agua'
+    },
+    {
+      name: 'Carvão Vegetal 3kg',
+      desc: 'Carvão vegetal puro, ótimo poder calorífico pra churrasco.',
+      price: 18.00,
+      stock: 30,
+      image: 'carvão4.png',
+      grid: 'grid-carvao'
+    },
+    {
+      name: 'Carvão Vegetal — vários tamanhos (2kg a 10kg)',
+      desc: 'Disponível em 2kg, 4kg, 8kg e 10kg. Informe o peso desejado no pedido.',
+      price: 10.00,
+      stock: 25,
+      image: 'carvão2.png',
+      grid: 'grid-carvao'
+    },
+    {
+      name: 'Carvão Especial para Churrasco',
+      desc: 'Carvão granulado e limpo, feito especialmente pra churrasco.',
+      price: 20.00,
+      stock: 12,
+      image: 'carvão3.png',
+      grid: 'grid-carvao'
+    }
+  ];
+
+  function formatPreco(v){
+    return v.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+  }
+
+  function slugify(texto){
+    return texto.toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .replace(/[^a-z0-9]+/g,'_')
+      .replace(/^_+|_+$/g,'');
+  }
+
+  function montarLinkWhats(produto){
+    const msg = `Olá! Gostaria de pedir:\n\n*${produto.name}*\nValor: ${formatPreco(produto.price)}\n\nPode me ajudar a fechar o pedido?`;
+    return `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+  }
+
+  function montarLinkTelegram(produto){
+    const codigo = 'pedido_' + slugify(produto.name);
+    return `https://t.me/${CONFIG.telegramBot}?start=${codigo}`;
+  }
+
+  function pagarComPix(nomeProduto, valor){
+    const texto = `Chave Pix: ${CONFIG.pixKey}\nValor: ${formatPreco(valor)}\nProduto: ${nomeProduto}`;
+    if (navigator.clipboard){
+      navigator.clipboard.writeText(CONFIG.pixKey).catch(() => {});
+    }
+    alert('Chave Pix copiada!\n\n' + texto);
+  }
+
+  function linkDoProduto(produto){
+    const url = new URL(window.location.href);
+    url.search = '';
+    url.searchParams.set('produto', slugify(produto.name));
+    return url.toString();
+  }
+
+  function copiarLinkProduto(produto){
+    const link = linkDoProduto(produto);
+    if (navigator.clipboard){
+      navigator.clipboard.writeText(link).catch(() => {});
+    }
+    alert('Link do produto copiado!\n\n' + link);
+  }
+
+  function botoesHtml(produto){
+    return `
+      <a class="btn-whats" href="${montarLinkWhats(produto)}" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn-tele" href="${montarLinkTelegram(produto)}" target="_blank" rel="noopener">Telegram</a>
+      <button class="btn-pix" type="button" data-pix="1">Pagar com Pix</button>
+      <button class="btn-link" type="button" data-link="1">Copiar link do produto</button>
+    `;
+  }
+
+  function ligarBotaoPix(container, produto){
+    const btn = container.querySelector('[data-pix]');
+    if (btn) btn.addEventListener('click', () => pagarComPix(produto.name, produto.price));
+    const linkBtn = container.querySelector('[data-link]');
+    if (linkBtn) linkBtn.addEventListener('click', () => copiarLinkProduto(produto));
+  }
+
+  function abrirModal(produto){
+    document.getElementById('modalImg').src = produto.image;
+    document.getElementById('modalImg').alt = produto.name;
+    document.getElementById('modalNome').textContent = produto.name;
+    document.getElementById('modalPreco').textContent = formatPreco(produto.price);
+    document.getElementById('modalDesc').textContent = produto.desc;
+    document.getElementById('modalEstoque').textContent = `Em estoque: ${produto.stock} un.`;
+    const botoes = document.getElementById('modalBotoes');
+    botoes.innerHTML = botoesHtml(produto);
+    ligarBotaoPix(botoes, produto);
+    document.getElementById('modalOverlay').classList.add('aberto');
+  }
+
+  function fecharModal(){
+    document.getElementById('modalOverlay').classList.remove('aberto');
+  }
+
+  document.getElementById('modalFechar').addEventListener('click', fecharModal);
+  document.getElementById('modalOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'modalOverlay') fecharModal();
+  });
+
+  function criarCard(produto){
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="img-wrap">
+        <img class="produto" src="${produto.image}" alt="${produto.name}">
+      </div>
+      <div class="info">
+        <div class="nome">${produto.name}</div>
+        <div class="desc">${produto.desc}</div>
+        <div class="preco">${formatPreco(produto.price)}</div>
+        <div class="estoque">Em estoque: ${produto.stock} un.</div>
+        <div class="pagamento">Pagamento via Pix</div>
+      </div>
+    `;
+    card.querySelector('.img-wrap').addEventListener('click', () => abrirModal(produto));
+    return card;
+  }
+
+  PRODUCTS.forEach(p => {
+    document.getElementById(p.grid).appendChild(criarCard(p));
+  });
+
+  const slugAlvo = new URLSearchParams(window.location.search).get('produto');
+  if (slugAlvo){
+    const produtoAlvo = PRODUCTS.find(p => slugify(p.name) === slugAlvo);
+    if (produtoAlvo) abrirModal(produtoAlvo);
+  }
+</script>
+
+</body>
+</html>
